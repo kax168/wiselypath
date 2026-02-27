@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+}
+const { title, description, canonical } = Astro.props;
+const siteUrl = 'https://wiselypath.com';
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} | WiselyPath</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical || Astro.url.href} />
+  <meta name="robots" content="index, follow" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <slot name="head" />
+</head>
+<body>
+  <slot name="header" />
+  <main><slot /></main>
+  <slot name="footer" />
+</body>
+</html>

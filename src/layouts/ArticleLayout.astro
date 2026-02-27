@@ -1,0 +1,46 @@
+---
+import BaseLayout from './BaseLayout.astro';
+interface Props {
+  title: string;
+  description: string;
+  category: string;
+  publishDate: string;
+  modifiedDate?: string;
+  faq?: Array<{q: string, a: string}>;
+}
+const { title, description, category, publishDate, modifiedDate, faq } = Astro.props;
+---
+<BaseLayout title={title} description={description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": title,
+      "description": description,
+      "datePublished": publishDate,
+      "dateModified": modifiedDate || publishDate,
+      "publisher": {
+        "@type": "Organization",
+        "name": "WiselyPath"
+      }
+    })} />
+    {faq && faq.length > 0 && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faq.map(f => ({
+          "@type": "Question",
+          "name": f.q,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": f.a
+          }
+        }))
+      })} />
+    )}
+  </Fragment>
+  <article>
+    <h1>{title}</h1>
+    <slot />
+  </article>
+</BaseLayout>
