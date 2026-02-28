@@ -5,7 +5,7 @@ interface Props {
   canonical?: string;
 }
 const { title, description, canonical } = Astro.props;
-const siteUrl = 'https://wiselypath.com';
+const siteUrl = 'https://wiselypath.life';
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +17,14 @@ const siteUrl = 'https://wiselypath.com';
   <link rel="canonical" href={canonical || Astro.url.href} />
   <meta name="robots" content="index, follow" />
   <link rel="sitemap" href="/sitemap-index.xml" />
+  <meta property="og:title" content={`${title} | WiselyPath`} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical || Astro.url.href} />
+  <meta property="og:site_name" content="WiselyPath" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={`${title} | WiselyPath`} />
+  <meta name="twitter:description" content={description} />
   <slot name="head" />
 </head>
 <body>
