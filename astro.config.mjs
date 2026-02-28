@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://wiselypath.com',
+  site: 'https://wiselypath.life',
   integrations: [sitemap()],
   output: 'static',
   build: {
